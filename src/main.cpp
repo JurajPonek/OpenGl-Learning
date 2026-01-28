@@ -17,6 +17,10 @@
 #include "glm/glm.hpp"
 #include "glm/ext/matrix_clip_space.hpp"
 #include "glm/ext/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw.h"
+#include "imgui/imgui_impl_opengl3.h"
 
 int main(void)
 {
@@ -105,6 +109,15 @@ int main(void)
 	};
 
 	Renderer renderer;
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+	ImGui::StyleColorsDark();
+
+	ImGui_ImplGlfw_InitForOpenGL(display.GetWindow(), true);
+	ImGui_ImplOpenGL3_Init("#version 330");
+
 	Shader basic("res/shaders/Basic.shader");
 	basic.Bind();
 	Texture texture1("res/textures/container.jpg");
@@ -125,12 +138,23 @@ int main(void)
 	float lastFrame = 0.0f;
 
 	EulerCamera camera(glm::vec3(0.0f, 0.0f, 3.0f), 45.0f, static_cast<float>(display.getWidth()) / display.getHeight(), .1f, 100.0f);
+	glm::vec3 translation(0.0f);
+	float angleX = 0.0f;
+	float angleY = 0.0f;
+	float angleZ = 0.0f;
+	glm::vec3 scale(1.0f);
 	while (!display.ShouldWindowClose())
 	{
+		renderer.Clear();
+		display.UpdateInputMode();
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+
 		float now = glfwGetTime();
 		display.ProcessInput();
 		display.ProcessCameraInput(camera, deltaTime);
-		renderer.Clear();
+
 		texture1.Bind(0);
 		texture2.Bind(1);
 
@@ -139,35 +163,44 @@ int main(void)
 		float z = cos(glfwGetTime()) * r;
 
 		glm::mat4 projection(1.0f);
+		glm::mat4 model(1.0f);
+		model = glm::translate(model, translation);
+		model = glm::rotate(model, glm::radians(angleX), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(angleY), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(angleZ), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, scale);
 		projection = glm::perspective(glm::radians(camera.getFov()), camera.getAspectRatio(), camera.getNearPlane(), camera.getFarPlane());
 		basic.SetMatrix4f("view", camera.getViewMatrix());
 		basic.SetMatrix4f("projection", projection);
-		for (int i = 0; i < 10; i++)
+		basic.SetMatrix4f("model", model);
+		basic.Bind();
+		renderer.draw(vao, ib, basic);
+		if (display.renderUI())
 		{
-			if (i % 3 == 0)
-			{
-				glm::mat4 model(1.0f);
-				model = glm::translate(model, cubePositions[i]);
-				model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.0f, 0.3f, 0.5f));
-				basic.SetMatrix4f("model", model);
-				basic.Bind();
-				renderer.draw(vao, ib, basic);
-			}
-			else
-			{
-				glm::mat4 model(1.0f);
-				model = glm::translate(model, cubePositions[i]);
-				basic.SetMatrix4f("model", model);
-				renderer.draw(vao, ib, basic);
-			}
+			ImGui::Begin("Translation");
+
+			ImGui::DragFloat3("Translation", glm::value_ptr(translation), 0.05f, -10.0f, 10.0f);
+			ImGui::DragFloat("Rotation X", &angleX, 1.0f, -360.0f, 360.0f);
+			ImGui::DragFloat("Rotation Y", &angleY, 1.0f, -360.0f, 360.0f);
+			ImGui::DragFloat("Rotation Z", &angleZ, 1.0f, -360.0f, 360.0f);
+			ImGui::DragFloat3("Scale", glm::value_ptr(scale), 0.05f, -10.0f, 10.0f);
+
+			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+			ImGui::End();
 		}
 
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		display.SwapBuffers();
 		glfwPollEvents();
 
 		deltaTime = lastFrame - now;
 		lastFrame = now;
 	}
+
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
 
 	return 0;
 }

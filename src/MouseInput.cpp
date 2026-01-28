@@ -7,6 +7,11 @@ float MouseInput::s_scrollOffsetY = 0.0f;
 void MouseInput::MouseCallBack(GLFWwindow* window, double xpos, double ypos)
 {
 	static bool firstMouseMovement = true;
+	if (glfwGetInputMode(window, GLFW_CURSOR) != GLFW_CURSOR_DISABLED) {
+		firstMouseMovement = true;
+		return;
+	}
+
 	static double lastX, lastY;
 
 	if (firstMouseMovement)

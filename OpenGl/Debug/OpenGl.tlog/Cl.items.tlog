@@ -10,6 +10,13 @@ C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\Renderer.cpp;C:\Users\Tibi\Desk
 C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\Shader.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\Shader.obj
 C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\vendor\glm\detail\glm.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\glm.obj
 C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\vendor\glm\glm.cppm;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\glm.cppm.obj
+C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\vendor\imgui\imgui.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\imgui.obj
+C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\vendor\imgui\imgui_demo.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\imgui_demo.obj
+C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\vendor\imgui\imgui_draw.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\imgui_draw.obj
+C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\vendor\imgui\imgui_impl_glfw.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\imgui_impl_glfw.obj
+C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\vendor\imgui\imgui_impl_opengl3.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\imgui_impl_opengl3.obj
+C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\vendor\imgui\imgui_tables.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\imgui_tables.obj
+C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\vendor\imgui\imgui_widgets.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\imgui_widgets.obj
 C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\vendor\stb_image\stb_image.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\stb_image.obj
 C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\VertexArray.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\VertexArray.obj
 C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\VertexBuffer.cpp;C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\OpenGl\Debug\VertexBuffer.obj

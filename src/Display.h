@@ -6,28 +6,30 @@
 
 class Display
 {
-private:
-	int m_windowWidth;
-	int m_windowHeight;
-	GLFWwindow* m_window;
-
 public:
 	Display(int width, int height, const std::string& title);
 	~Display();
 	void ResizeWindow(int widht, int height);
 	bool ShouldWindowClose() const;
 	void SwapBuffers() const;
+	void ProcessInput();
+	void ProcessCameraInput(Camera& camera, float deltaTime);
+	void UpdateInputMode();
 	inline GLFWwindow* GetWindow() const
 	{
 		return m_window;
 	}
 	inline int getWidth() const { return m_windowWidth; }
 	inline int getHeight() const { return m_windowHeight; }
-	void ProcessInput();
-	void ProcessCameraInput(Camera& camera, float deltaTime);
+	inline bool renderUI() const { return !m_isCursordDisabled; }
 
 private:
 	static void ResizeCallback(GLFWwindow* window, int width, int height);
 	void InitializeDebugContext();
 	void PrintSystemInfo();
+private:
+	int m_windowWidth;
+	int m_windowHeight;
+	GLFWwindow* m_window;
+	bool m_isCursordDisabled;
 };
