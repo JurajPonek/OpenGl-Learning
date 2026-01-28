@@ -143,6 +143,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\QuaternionCamera.cpp" />
     <ClCompile Include="src\KeyBoardInput.cpp" />
     <ClCompile Include="src\EulerCamera.cpp" />
     <ClCompile Include="src\Display.cpp" />
@@ -303,6 +305,8 @@
     <None Include="src\vendor\glm\gtx\wrap.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\QuaternionCamera.h" />
     <ClInclude Include="src\KeyBoardInput.h" />
     <ClInclude Include="src\EulerCamera.h" />
     <ClInclude Include="src\Display.h" />

@@ -1,8 +1,10 @@
 ﻿  Scanning sources for module dependencies...
+  QuaternionCamera.cpp
   main.cpp
-C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\main.cpp(129,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\main.cpp(137,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\main.cpp(130,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\main.cpp(138,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\main.cpp(139,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   OpenGl.vcxproj -> C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\Debug\OpenGl.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

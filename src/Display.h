@@ -24,7 +24,7 @@ public:
 	inline int getWidth() const { return m_windowWidth; }
 	inline int getHeight() const { return m_windowHeight; }
 	void ProcessInput();
-	void ProcessCameraInput(EulerCamera& camera, float deltaTime);
+	void ProcessCameraInput(Camera& camera, float deltaTime);
 
 private:
 	static void ResizeCallback(GLFWwindow* window, int width, int height);

@@ -6,7 +6,7 @@
 #include "glm/gtc/quaternion.hpp"
 
 EulerCamera::EulerCamera(glm::vec3 position, float fov, float acpectRatio, float nearPlane, float farPlane)
-	: m_position(position), m_fov(fov), m_acpectRatio(acpectRatio), m_nearPlane(nearPlane), m_farPlane(farPlane), m_pitch(0.0f), m_yaw(-90.0f)
+	: Camera(position, fov, acpectRatio, nearPlane, farPlane), m_pitch(0.0f), m_yaw(-90.0f)
 {
 	m_Up = { .0f, 1.0f, .0f };
 	m_front = { 0.0f, 0.0f, -1.0f };
@@ -36,9 +36,8 @@ void EulerCamera::processKeyBoard(CameraDirection direction, float deltaTime)
 }
 void EulerCamera::processMouseMovement(double offsetX, double offsetY)
 {
-	float sensitivity = 0.05f;
-	offsetX *= sensitivity;
-	offsetY *= sensitivity;
+	offsetX *= defaultSensitivity;
+	offsetY *= defaultSensitivity;
 
 	m_yaw += static_cast<float>(offsetX);
 	m_pitch += static_cast<float>(offsetY);

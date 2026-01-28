@@ -144,7 +144,7 @@ void Display::ProcessInput()
 		glfwSetWindowShouldClose(m_window, true);
 	}
 }
-void Display::ProcessCameraInput(EulerCamera& camera, float deltaTime)
+void Display::ProcessCameraInput(Camera& camera, float deltaTime)
 {
 	if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_W))
 	{
