@@ -2,6 +2,8 @@
 #include <GLFW/glfw3.h>
 #include "Display.h"
 #include <iostream>
+#include "KeyBoardInput.h"
+#include "MouseInput.h"
 
 void APIENTRY glDebugOutput(GLenum source, GLenum type, unsigned int id, GLenum severity,
 	GLsizei length, const char* message, const void* userParam)
@@ -44,7 +46,7 @@ void APIENTRY glDebugOutput(GLenum source, GLenum type, unsigned int id, GLenum 
 	std::cout << std::endl;
 	std::cout << "===============================\n";
 }
-Display::Display(int width, int height, const std::string& title)
+Display::Display(int width, int height, const std::string& title) : m_windowWidth(width), m_windowHeight(height)
 {
 	if (!glfwInit())
 	{
@@ -56,14 +58,15 @@ Display::Display(int width, int height, const std::string& title)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-	window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-	if (!window)
+	m_window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+	if (!m_window)
 	{
 		glfwTerminate();
-		std::cout << "Error while creating window";
+		std::cout << "Error while creating m_window";
 		return;
 	}
-	glfwMakeContextCurrent(window);
+	glfwMakeContextCurrent(m_window);
+	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	if (glewInit() != GLEW_OK) {
 		std::cout << "Error while initializing GLEW" << std::endl;
@@ -71,14 +74,16 @@ Display::Display(int width, int height, const std::string& title)
 	}
 	InitializeDebugContext();
 	glViewport(0, 0, width, height);
-	glfwSetFramebufferSizeCallback(window, ResizeCallback);
+	glfwSetFramebufferSizeCallback(m_window, ResizeCallback);
+	glfwSetCursorPosCallback(m_window, MouseInput::MouseCallBack);
+	glfwSetScrollCallback(m_window, MouseInput::ScrollCallBack);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	PrintSystemInfo();
 }
 
 Display::~Display()
 {
-	glfwDestroyWindow(window);
+	glfwDestroyWindow(m_window);
 	glfwTerminate();
 }
 
@@ -114,17 +119,17 @@ void Display::PrintSystemInfo()
 
 void Display::ResizeWindow(int width, int height)
 {
-	glfwSetWindowSize(window, width, height);
+	glfwSetWindowSize(m_window, width, height);
 }
 
 bool Display::ShouldWindowClose() const
 {
-	return glfwWindowShouldClose(window);
+	return glfwWindowShouldClose(m_window);
 }
 
 void Display::SwapBuffers() const
 {
-	glfwSwapBuffers(window);
+	glfwSwapBuffers(m_window);
 }
 
 void Display::ResizeCallback(GLFWwindow* window, int width, int height)
@@ -134,8 +139,33 @@ void Display::ResizeCallback(GLFWwindow* window, int width, int height)
 
 void Display::ProcessInput()
 {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_ESCAPE))
 	{
-		glfwSetWindowShouldClose(window, true);
+		glfwSetWindowShouldClose(m_window, true);
 	}
+}
+void Display::ProcessCameraInput(EulerCamera& camera, float deltaTime)
+{
+	if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_W))
+	{
+		camera.processKeyBoard(CameraDirection::FORWARD, deltaTime);
+	}
+	if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_S))
+	{
+		camera.processKeyBoard(CameraDirection::BACKWARD, deltaTime);
+	}
+	if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_D))
+	{
+		camera.processKeyBoard(CameraDirection::RIGHT, deltaTime);
+	}
+	if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_A))
+	{
+		camera.processKeyBoard(CameraDirection::LEFT, deltaTime);
+	}
+
+	camera.processMouseMovement(MouseInput::s_offsetX, MouseInput::s_offsetY);
+	MouseInput::s_offsetX = 0.0f;
+	MouseInput::s_offsetY = 0.0f;
+	camera.processMouseScroll(MouseInput::s_scrollOffsetY);
+	MouseInput::s_scrollOffsetY = 0.0f;
 }

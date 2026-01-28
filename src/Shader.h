@@ -2,6 +2,8 @@
 #include <string>
 #include <unordered_map>
 
+#include "glm/fwd.hpp"
+
 class Shader
 {
 private:
@@ -28,6 +30,7 @@ public:
 	void SetInt(const std::string& name, int value);
 	void SetFloat(const std::string& name, float value);
 	void SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3);
+	void SetMatrix4f(const std::string& name, const glm::mat4& matrix);
 
 private:
 	ShaderProgramSource ParseFile(const std::string& fileName);

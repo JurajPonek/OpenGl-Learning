@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include "Shader.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 Shader::Shader(const std::string& fileName)
 	: programID(0), fragmentShaderID(0), vertexShaderID(0)
@@ -139,4 +141,8 @@ void Shader::SetFloat(const std::string& name, float value)
 void Shader::SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
 {
 	glUniform4f(GetUniformLocation(name), v0, v1, v2, v3);
+}
+void Shader::SetMatrix4f(const std::string& name, const glm::mat4& matrix)
+{
+	glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &matrix[0][0]);
 }

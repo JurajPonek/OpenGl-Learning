@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OpenGl\\Debug\\glm.cppm.obj",
+            "outputs": [
+                "C:\\Users\\Tibi\\Desktop\\OpenGL Learning\\OpenGl\\OpenGl\\Debug\\vc143.pdb",
+                "OpenGl\\Debug\\",
+                "C:\\Users\\Tibi\\Desktop\\OpenGL Learning\\OpenGl\\OpenGl\\Debug\\glm.cppm.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "glm",
+                    "source-path": "c:\\users\\tibi\\desktop\\opengl learning\\opengl\\src\\vendor\\glm\\glm.cppm",
+                    "is-interface": true
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
