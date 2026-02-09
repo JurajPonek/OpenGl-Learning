@@ -14,6 +14,11 @@ public:
 	void processMouseMovement(double offsetX, double offsetY) override;
 	void processMouseScroll(double offsetY) override;
 
+	inline glm::vec3 GetFront() const
+	{
+		return m_front;
+	}
+
 private:
 	void updateViewMatrix() override;
 

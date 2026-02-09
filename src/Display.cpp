@@ -47,7 +47,7 @@ void APIENTRY glDebugOutput(GLenum source, GLenum type, unsigned int id, GLenum 
 	std::cout << std::endl;
 	std::cout << "===============================\n";
 }
-Display::Display(int width, int height, const std::string& title) : m_windowWidth(width), m_windowHeight(height), m_isCursordDisabled(true)
+Display::Display(int width, int height, const std::string& title) : m_windowWidth(width), m_windowHeight(height), m_isCursordDisabled(false)
 {
 	if (!glfwInit())
 	{
@@ -67,7 +67,7 @@ Display::Display(int width, int height, const std::string& title) : m_windowWidt
 		return;
 	}
 	glfwMakeContextCurrent(m_window);
-	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	if (glewInit() != GLEW_OK) {
 		std::cout << "Error while initializing GLEW" << std::endl;
@@ -145,37 +145,37 @@ void Display::ProcessInput()
 		glfwSetWindowShouldClose(m_window, true);
 	}
 }
-void Display::ProcessCameraInput(Camera& camera, float deltaTime)
-{
-	ImGuiIO& io = ImGui::GetIO();
-
-	if (!io.WantCaptureMouse) {
-		camera.processMouseMovement(MouseInput::s_offsetX, MouseInput::s_offsetY);
-		MouseInput::s_offsetX = 0.0f;
-		MouseInput::s_offsetY = 0.0f;
-		camera.processMouseScroll(MouseInput::s_scrollOffsetY);
-		MouseInput::s_scrollOffsetY = 0.0f;
-	}
-
-	if (!io.WantCaptureKeyboard) {
-		if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_W))
-		{
-			camera.processKeyBoard(CameraDirection::FORWARD, deltaTime);
-		}
-		if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_S))
-		{
-			camera.processKeyBoard(CameraDirection::BACKWARD, deltaTime);
-		}
-		if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_D))
-		{
-			camera.processKeyBoard(CameraDirection::RIGHT, deltaTime);
-		}
-		if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_A))
-		{
-			camera.processKeyBoard(CameraDirection::LEFT, deltaTime);
-		}
-	}
-}
+//void Display::ProcessCameraInput(Camera& camera, float deltaTime)
+//{
+//	ImGuiIO& io = ImGui::GetIO();
+//
+//	if (!io.WantCaptureMouse) {
+//		camera.processMouseMovement(MouseInput::s_offsetX, MouseInput::s_offsetY);
+//		MouseInput::s_offsetX = 0.0f;
+//		MouseInput::s_offsetY = 0.0f;
+//		camera.processMouseScroll(MouseInput::s_scrollOffsetY);
+//		MouseInput::s_scrollOffsetY = 0.0f;
+//	}
+//
+//	if (!io.WantCaptureKeyboard) {
+//		if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_W))
+//		{
+//			camera.processKeyBoard(CameraDirection::FORWARD, deltaTime);
+//		}
+//		if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_S))
+//		{
+//			camera.processKeyBoard(CameraDirection::BACKWARD, deltaTime);
+//		}
+//		if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_D))
+//		{
+//			camera.processKeyBoard(CameraDirection::RIGHT, deltaTime);
+//		}
+//		if (KeyBoardInput::IsKeyPressed(m_window, GLFW_KEY_A))
+//		{
+//			camera.processKeyBoard(CameraDirection::LEFT, deltaTime);
+//		}
+//	}
+//}
 
 void Display::UpdateInputMode()
 {

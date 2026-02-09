@@ -1,8 +1,4 @@
 ﻿  Scanning sources for module dependencies...
   main.cpp
-C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\main.cpp(154,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\main.cpp(162,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\main.cpp(163,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\src\main.cpp(69,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   OpenGl.vcxproj -> C:\Users\Tibi\Desktop\OpenGL Learning\OpenGl\Debug\OpenGl.exe
-  'pwsh.exe' is not recognized as an internal or external command,
-  operable program or batch file.

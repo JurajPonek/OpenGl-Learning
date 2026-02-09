@@ -20,16 +20,16 @@ void EulerCamera::processKeyBoard(CameraDirection direction, float deltaTime)
 	switch (direction)
 	{
 	case CameraDirection::FORWARD:
-		m_position -= cameraSpeed * m_front;
-		break;
-	case CameraDirection::BACKWARD:
 		m_position += cameraSpeed * m_front;
 		break;
+	case CameraDirection::BACKWARD:
+		m_position -= cameraSpeed * m_front;
+		break;
 	case CameraDirection::RIGHT:
-		m_position -= cameraSpeed * glm::normalize(glm::cross(m_front, m_Up));
+		m_position += cameraSpeed * glm::normalize(glm::cross(m_front, m_Up));
 		break;
 	case CameraDirection::LEFT:
-		m_position += cameraSpeed * glm::normalize(glm::cross(m_front, m_Up));
+		m_position -= cameraSpeed * glm::normalize(glm::cross(m_front, m_Up));
 		break;
 	}
 	updateViewMatrix();

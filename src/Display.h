@@ -13,7 +13,7 @@ public:
 	bool ShouldWindowClose() const;
 	void SwapBuffers() const;
 	void ProcessInput();
-	void ProcessCameraInput(Camera& camera, float deltaTime);
+	//void ProcessCameraInput(Camera& camera, float deltaTime);
 	void UpdateInputMode();
 	inline GLFWwindow* GetWindow() const
 	{

@@ -32,6 +32,7 @@ public:
 	inline float getAspectRatio() const { return m_acpectRatio; }
 	inline float getNearPlane() const { return m_nearPlane; }
 	inline float getFarPlane() const { return m_farPlane; }
+	inline glm::vec3 getPosition() const { return m_position; }
 protected:
 	virtual void updateViewMatrix() = 0;
 
